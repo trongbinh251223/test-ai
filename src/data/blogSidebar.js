@@ -24,12 +24,12 @@ export const TAGS = [
 export const AUTHORS = [
   {
     "name": "Sébastien Lorber",
-    "path": "/blog/authors/slorber",
-    "image": "https://avatars.githubusercontent.com/u/0?v=4"
+    "path": "/blog/authors/all-sebastien-lorber-articles",
+    "image": "https://github.com/slorber.png"
   },
   {
     "name": "Yangshun Tay",
     "path": "/blog/authors/yangshun",
-    "image": "https://avatars.githubusercontent.com/u/0?v=4"
+    "image": "https://github.com/yangshun.png"
   }
 ];

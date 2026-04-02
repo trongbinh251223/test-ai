@@ -69,12 +69,20 @@ function syncBlogData() {
 
   const authorsArray = Array.from(definedAuthors).map(authorKey => {
     const authorInfo = authorsData[authorKey] || {};
+    let urlPath = `/blog/authors/${kebabCase(authorKey)}`;
+    if (authorInfo.page && typeof authorInfo.page.permalink === 'string') {
+      let slug = authorInfo.page.permalink;
+      if (slug.startsWith('/')) slug = slug.substring(1);
+      urlPath = `/blog/authors/${slug}`;
+    } else if (authorInfo.page === false) {
+      urlPath = '#'; // disabled author page
+    }
     return {
       name: authorInfo.name || authorKey,
-      path: `/blog/authors/${kebabCase(authorKey)}`,
-      image: authorInfo.imageURL || 'https://avatars.githubusercontent.com/u/0?v=4'
+      path: urlPath,
+      image: authorInfo.image_url || authorInfo.imageURL || 'https://avatars.githubusercontent.com/u/0?v=4'
     };
-  });
+  }).filter(a => a.path !== '#');
 
   const fileContent = `// AUTO GENERATED FILE (DO NOT EDIT MANUALLY)
 // Run "npm run sync-blog-data" or "npm start" to re-generate from your blog posts.
